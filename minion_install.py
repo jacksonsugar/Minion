@@ -2,7 +2,7 @@
 
 '''
 This program was written to simplify configuration of a
-Class Minion camera/sensor.
+Minion camera/sensor/vehicle.
 
 More tools to be added in future versions
 
@@ -11,7 +11,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 
-print "Welcome to the MINION installer 0.01! \n"
+print "Welcome to the MINION installer 0.1! \n"
 
 ini_dir=os.getcwd()
 
@@ -58,6 +58,10 @@ minion_dhcp = minion_dhcp.replace('XXX', str(IP_addr))
 # Write the file out again
 with open('/etc/dhcpcd.minion', 'w') as file:
   file.write(minion_dhcp)
+  
+# Set up wifi
+
+os.system("sudo sh -c 'cat source/dhcp/wpa_supplicant.txt >> /etc/wpa_supplicant/wpa_supplicant.conf'")
 
 # Enable the splash screen easter egg
 	
@@ -77,7 +81,7 @@ else:
 # Get updates
 os.system('sudo apt-get update && sudo apt-get upgrade -y')
 # Get needed packages
-os.system('sudo apt-get install build-essential python-smbus i2c-tools')
+os.system('sudo apt-get install build-essential python-smbus i2c-tools avrdude')
 # raspi-config
 os.system('sudo raspi-config nonint do_change_locale en_IS.UTF-8') 
 os.system('sudo raspi-config nonint do_boot_behaviour B1') 
@@ -90,7 +94,7 @@ os.system('sudo cat source/minion_alias.txt >> /home/pi/.bashrc')
 # Create folders
 os.system('mkdir /home/pi/Documents/Minion_tools /home/pi/Documents/minion_pics /home/pi/Documents/minion_data /home/pi/Documents/Minion_scripts')
 # Move scripts to local build
-os.system('sudo cp source/dhcp-configure.py source/dhcp-switch.py source/RTC-set.py source/Shutdown.py source/flasher.py /home/pi/Documents/Minion_tools/')
+os.system('sudo cp source/dhcp-configure.py source/dhcp-switch.py source/RTC-set.py source/Shutdown.py source/flasher.py source/avrdude_translator.py /home/pi/Documents/Minion_tools/')
 os.system('sudo cp source/Class_Minion.py source/ADXL345_Sampler_100Hz.py source/Temp+Pres.py source/drivers/ms5837-python/ms5837.py source/RTC_Finish.py /home/pi/Documents/Minion_scripts')
 # Clone repos
 os.chdir('source/drivers/')
@@ -108,14 +112,13 @@ os.system('sudo python setup.py install')
 # Exit
 os.chdir(ini_dir)
 
-
 # Set up and sync RTC
-RTC_type = input('What RTC are you using? \n --- (1): pcf8523DS3231 \n --- (2): DS3231\n --- ')
+RTC_type = input('What RTC are you using? \n --- (1): pcf8523 \n --- (2): DS3231\n --- ')
 
 if len(str(RTC_type)) != 1 or RTC_type < 1 or RTC_type > 2:
 	RTC_fail = 1
 	while RTC_fail == 1: 
-		RTC_addr = input('Please select RTC using the numbers below: \n --- (1): DS3231 \n --- (2): pcf8523')
+		RTC_addr = input('Please select RTC using the numbers below: \n --- (1): pcf8523 \n --- (2): DS3231 \n --- ')
 		if len(str(RTC_type)) != 1 or RTC_type < 1 or RTC_type > 2:
 			pass
 		else:
