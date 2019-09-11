@@ -36,7 +36,7 @@ os.system('sudo hwclock -w')
 
 # Write deployment scripts to rc.local
 
-os.system("sudo sed -i '/# Print the IP/isudo python /home/pi/Documents/Minion_scripts/Class_Minion.py \n' /etc/rc.local")
+os.system("sudo sed -i '/# Print the IP/isudo python /home/pi/Documents/Minion_scripts/Minion.py \n' /etc/rc.local")
 os.system("sudo sed -i '/# Print the IP/isudo python /home/pi/Documents/Minion_scripts/Temp+Pres.py &\n' /etc/rc.local")
 os.system("sudo sed -i '/# Print the IP/isudo python /home/pi/Documents/Minion_scripts/ADXL345_Sampler_100Hz.py &\n' /etc/rc.local")
 os.system("sudo sed -i '/# Print the IP/i#sudo python /home/pi/Documents/Minion_scripts/Keep_Me_Alive.py \n' /etc/rc.local")

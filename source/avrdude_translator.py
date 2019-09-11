@@ -44,3 +44,4 @@ os.system("sudo avrdude -p atmega328p -C /home/pi/Minion/source/avrdude_stuff/av
 
 
 avr_flash()
+os.system('stay-on')
