@@ -84,7 +84,7 @@ os.system('sudo apt-get update && sudo apt-get upgrade -y')
 os.system('sudo apt-get install build-essential python-smbus i2c-tools avrdude')
 # raspi-config
 os.system('sudo raspi-config nonint do_change_locale en_IS.UTF-8') 
-os.system('sudo raspi-config nonint do_boot_behaviour B1') 
+os.system('sudo raspi-config nonint do_boot_behaviour B2') 
 os.system('sudo raspi-config nonint do_camera 0') 
 os.system('sudo raspi-config nonint do_ssh 0') 
 os.system('sudo raspi-config nonint do_i2c 0') 
@@ -94,8 +94,8 @@ os.system('sudo cat source/minion_alias.txt >> /home/pi/.bashrc')
 # Create folders
 os.system('mkdir /home/pi/Documents/Minion_tools /home/pi/Documents/minion_pics /home/pi/Documents/minion_data /home/pi/Documents/Minion_scripts')
 # Move scripts to local build
-os.system('sudo cp source/dhcp-configure.py source/dhcp-switch.py source/RTC-set.py source/Shutdown.py source/flasher.py source/avrdude_translator.py /home/pi/Documents/Minion_tools/')
-os.system('sudo cp source/Class_Minion.py source/ADXL345_Sampler_100Hz.py source/Temp+Pres.py source/drivers/ms5837-python/ms5837.py source/RTC_Finish.py /home/pi/Documents/Minion_scripts')
+os.system('sudo cp source/Keep_Me_Alive.py source/dhcp-configure.py source/dhcp-switch.py source/RTC-set.py source/Shutdown.py source/flasher.py source/avrdude_translator.py /home/pi/Documents/Minion_tools/')
+os.system('sudo cp source/Minion.py source/ADXL345_Sampler_100Hz.py source/Temp+Pres.py source/drivers/ms5837-python/ms5837.py source/RTC_Finish.py /home/pi/Documents/Minion_scripts')
 # Clone repos
 os.chdir('source/drivers/')
 os.system('git clone https://github.com/bluerobotics/tsys01-python.git')
@@ -109,6 +109,9 @@ os.chdir('..')
 # Install adc driver
 os.chdir('Adafruit_Python_ADS1x15/')
 os.system('sudo python setup.py install')
+
+os.system('sudo cp /ms5837-python/ms5837.py /home/pi/Documents/Minion_scripts/')
+os.system('sudo cp -r /tsys01-python/tsys01 /home/pi/Documents/Minion_scripts/')
 # Exit
 os.chdir(ini_dir)
 
