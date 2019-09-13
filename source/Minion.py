@@ -45,7 +45,7 @@ def picture():
         pictime = pictime.replace("  ","_")
         pictime = pictime.replace(" ","_")
         pictime = pictime.replace(":","-")
-	    on()
+	on()
         camera.resolution = (2592, 1944)
         camera.framerate = 15
         camera.start_preview()
