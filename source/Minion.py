@@ -13,7 +13,7 @@ wifi = 7
 
 ifswitch = "sudo /home/pi/Documents/Minion_tools/dhcp-switch.py"
 
-iwlist = 'sudo iwlist wlan0 scan | grep "Class_Hub"'
+iwlist = 'sudo iwlist wlan0 scan | grep "Minion_Hub"'
 
 net_cfg = "ls /etc/ | grep dhcp"
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
         wifi_status = os.popen(iwlist).read()
 
-        if "Class_Hub" in wifi_status:
+        if "Minion_Hub" in wifi_status:
                 print "WIFI!!"
                 status = "Connected"
                 net_status = os.popen(net_cfg).read()
