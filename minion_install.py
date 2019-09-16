@@ -83,7 +83,6 @@ os.system('sudo apt-get update && sudo apt-get upgrade -y')
 # Get needed packages
 os.system('sudo apt-get install build-essential python-smbus i2c-tools avrdude')
 # raspi-config
-os.system('sudo raspi-config nonint do_
 os.system('sudo raspi-config nonint do_change_locale en_IS.UTF-8') 
 os.system('sudo raspi-config nonint do_boot_behaviour B2') 
 os.system('sudo raspi-config nonint do_camera 0') 
