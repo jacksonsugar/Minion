@@ -115,27 +115,9 @@ os.system('sudo cp /ms5837-python/ms5837.py /home/pi/Documents/Minion_scripts/')
 os.system('sudo cp -r /tsys01-python/tsys01 /home/pi/Documents/Minion_scripts/')
 # Exit
 os.chdir(ini_dir)
-
-# Set up and sync RTC
-RTC_type = input('What RTC are you using? \n --- (1): pcf8523 \n --- (2): DS3231\n --- ')
-
-if len(str(RTC_type)) != 1 or RTC_type < 1 or RTC_type > 2:
-	RTC_fail = 1
-	while RTC_fail == 1: 
-		RTC_addr = input('Please select RTC using the numbers below: \n --- (1): pcf8523 \n --- (2): DS3231 \n --- ')
-		if len(str(RTC_type)) != 1 or RTC_type < 1 or RTC_type > 2:
-			pass
-		else:
-			RTC_fail = 0
-else:
-	print "Appending /boot/config.txt"
-
-if RTC_type == 1:
-	os.system("echo 'dtoverlay=i2c-rtc,pcf8523' >> /boot/config.txt")
-elif RTC_type == 2:
-	os.system("echo 'dtoverlay=i2c-rtc,ds3231' >> /boot/config.txt")
-else:
-	print "How did you get here?"
+# Set clock
+print "Appending /boot/config.txt"
+os.system("echo 'dtoverlay=i2c-rtc,ds3231' >> /boot/config.txt")
 
 # Set pi to launch rest of script after reboot
 os.system("sudo sed -i '/# Print the IP/isudo python /home/pi/Documents/Minion_scripts/RTC_Finish.py\n\n' /etc/rc.local")
