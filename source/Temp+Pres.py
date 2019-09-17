@@ -2,6 +2,7 @@
 import ms5837
 import tsys01
 import time
+import os
 
 sensor_temp = tsys01.TSYS01()
 
@@ -9,9 +10,11 @@ sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
 
 def timesample():
 	global samp_time
-        samp_time = time.ctime()
+        samp_time = os.popen("sudo hwclock -r").read()
+	samp_time = samp_time.split('.',1)[0]
+        samp_time = samp_time.replace("  ","_")
         samp_time = samp_time.replace(" ","_")
-        samp_time = samp_time.replace(":","-")
+	samp_time = samp_time.replace(":","-")
 #	print samp_time
 
 # We must initialize the sensor before reading it
@@ -48,12 +51,12 @@ time.sleep(1)
 
 timesample()
 
-file_name = "/home/pi/Documents/Minion/minion_data/%s_T+D.txt" % samp_time
+file_name = "/home/pi/Documents/minion_data/%s_T+D.txt" % samp_time
 
 file = open(file_name,"w+")
 
 file.write("Temperature and Pressure @ %s\r\n" % samp_time)
-file.write("/r/n Timestamp,Pressure(mbar),T1(C),T2(C) \r\n")
+file.write("Timestamp,Pressure(mbar),T1(C),T2(C) \r\n")
 
 # Spew readings
 while True:
