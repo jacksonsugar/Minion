@@ -21,7 +21,7 @@ ping_hub = "ping 192.168.0.1 -c 1"
 
 ping_google = "ping google.com -c 1"
 
-subp = "sudo pkill -9 -f ADXL345_Sampler_100Hz.py"
+subp = "sudo killall python Temp+Pres.py"
 
 def flash():
         j = 0
