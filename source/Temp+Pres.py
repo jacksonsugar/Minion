@@ -10,7 +10,7 @@ sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
 
 def timesample():
 	global samp_time
-        samp_time = os.popen("sudo hwclock -r").read()
+        samp_time = os.popen("sudo hwclock -u -r").read()
 	samp_time = samp_time.split('.',1)[0]
         samp_time = samp_time.replace("  ","_")
         samp_time = samp_time.replace(" ","_")
