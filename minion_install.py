@@ -109,7 +109,7 @@ os.chdir('..')
 # Install adc driver
 os.chdir('Adafruit_Python_ADS1x15/')
 os.system('sudo python setup.py install')
-
+os.chdir('..')
 os.system('sudo cp /ms5837-python/ms5837.py /home/pi/Documents/Minion_scripts/')
 os.system('sudo cp -r /tsys01-python/tsys01 /home/pi/Documents/Minion_scripts/')
 # Exit
