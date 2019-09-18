@@ -40,7 +40,7 @@ def on():
 
 def picture():
 
-        pictime = os.popen("sudo hwclock -r").read()
+        pictime = os.popen("sudo hwclock -u -r").read()
         pictime = pictime.split('.',1)[0]
         pictime = pictime.replace("  ","_")
         pictime = pictime.replace(" ","_")
