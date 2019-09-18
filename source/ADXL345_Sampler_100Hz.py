@@ -9,7 +9,7 @@ import Adafruit_ADXL345
 accel = Adafruit_ADXL345.ADXL345()
 accel.set_data_rate(Adafruit_ADXL345.ADXL345_DATARATE_100_HZ)
 
-tstart = os.popen("sudo hwclock -r").read()
+tstart = os.popen("sudo hwclock -u -r").read()
 tstart = tstart.split('.',1)[0]
 tstart = tstart.replace("  ","_")
 tstart = tstart.replace(" ","_")
